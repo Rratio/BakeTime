@@ -1,8 +1,10 @@
 package b.udacity.reshu.bakingapp.activity;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,6 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 import b.udacity.reshu.bakingapp.R;
@@ -48,9 +53,7 @@ public class MainBakingActivity extends AppCompatActivity implements Mainview, C
         setSupportActionBar(toolbar);
 
         mainPresenter = new MainPresenter(this);
-
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
-
         getRecipeList();
 
     }
@@ -92,48 +95,14 @@ public class MainBakingActivity extends AppCompatActivity implements Mainview, C
     @Override
     public void onItemClickListener(int itemId, Cake recipe) {
 
+        Intent intent = new Intent(this, IngredientsDetailsActivity.class);
+        intent.putExtra("name", recipe.getName());
+        intent.putExtra("ingredients", String.valueOf(recipe.getIngredients()));
+        startActivity(intent);
+
     }
 
 
-    private class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
-        private int count, space;
-        private boolean includeEdge;
-
-        public GridSpacingItemDecoration(int count, int space, boolean includeEdge) {
-            this.count = count;
-            this.space = space;
-            this.includeEdge = includeEdge;
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-            int position = parent.getChildAdapterPosition(view);
-            int column = position % count;
-
-            if (includeEdge) {
-                outRect.left = space - column * space / count;
-                outRect.right = (column + 1) * space / count;
-
-                if (position < count) {
-                    outRect.top = space;
-                }
-                outRect.bottom = space;
-            } else {
-                outRect.left = column * space / count;
-                outRect.right = space - (column + 1) * space / count;
-
-                if (position > count) {
-                    outRect.top = space;
-                }
-            }
-
-        }
-    }
-
-    private int dpToPx(int i) {
-        Resources res = getResources();
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, i, res.getDisplayMetrics()));
-    }
 
 
 }

@@ -19,7 +19,7 @@
         android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ToolBarStyle"
-        android:titleTextColor="@color/colorAccent"
+        android:titleTextColor="#FFFFFF"
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
     </android.support.v7.widget.Toolbar>

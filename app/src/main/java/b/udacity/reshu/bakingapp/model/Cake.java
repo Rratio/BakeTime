@@ -13,7 +13,7 @@ public class Cake {
 
     @SerializedName("id")
     @Expose
-    private Integer mId;
+    private int mId;
     @SerializedName("name")
     @Expose
     private String name;
@@ -25,13 +25,19 @@ public class Cake {
     private List<Steps> steps = null;
     @SerializedName("serving")
     @Expose
-    private Integer serving;
+    private int serving;
     @SerializedName("image")
     @Expose
     private String image;
 
 
-    public Cake(Integer mId, String name, List<Ingredients> ingredients, List<Steps> steps, Integer serving, String image) {
+
+
+    public Cake() {
+    }
+
+
+    public Cake(int mId, String name, List<Ingredients> ingredients, List<Steps> steps, int serving, String image) {
         this.mId = mId;
         this.name = name;
         this.ingredients = ingredients;
@@ -40,11 +46,11 @@ public class Cake {
         this.image = image;
     }
 
-    public Integer getmId() {
+    public int getmId() {
         return mId;
     }
 
-    public void setmId(Integer mId) {
+    public void setmId(int mId) {
         this.mId = mId;
     }
 
@@ -72,11 +78,11 @@ public class Cake {
         this.steps = steps;
     }
 
-    public Integer getServing() {
+    public int getServing() {
         return serving;
     }
 
-    public void setServing(Integer serving) {
+    public void setServing(int serving) {
         this.serving = serving;
     }
 

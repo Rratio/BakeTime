@@ -1,6 +1,7 @@
 package b.udacity.reshu.bakingapp.adapter;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 
 /**
@@ -54,7 +55,7 @@ public class CakeAdapter extends RecyclerView.Adapter<CakeAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        Cake cake = cardModelList.get(position);
+        final Cake cake = cardModelList.get(position);
 
 
         Picasso.with(context).load(R.drawable.default_image).into(holder.movieImg);
@@ -69,6 +70,8 @@ public class CakeAdapter extends RecyclerView.Adapter<CakeAdapter.MyViewHolder> 
 
 
                 Intent detail = new Intent(context, IngredientsDetailsActivity.class);
+                detail.putExtra("name",cake.getName());
+                detail.putExtra("ingredients", String.valueOf(cake.getIngredients()));
                 context.startActivity(detail);
 
             }
@@ -95,11 +98,7 @@ public class CakeAdapter extends RecyclerView.Adapter<CakeAdapter.MyViewHolder> 
             release = (TextView) itemView.findViewById(R.id.title);
             cardView = (CardView) itemView.findViewById(R.id.card_view);
 
-
-
-
         }
-
 
         @Override
         public void onClick(View view) {
@@ -107,13 +106,6 @@ public class CakeAdapter extends RecyclerView.Adapter<CakeAdapter.MyViewHolder> 
             Cake cake = cardModelList.get(getAdapterPosition());
             mItemClickListener.onItemClickListener(elementId, cake);
         }
-
-
     }
-
-
-
-
-
-    }
+}
 
