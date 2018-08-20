@@ -28,7 +28,7 @@ import b.udacity.reshu.bakingapp.rest.ApiInterface;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainBakingActivity extends AppCompatActivity implements Mainview, CakeAdapter.ItemClickListener {
+public class MainBakingActivity extends AppCompatActivity implements Mainview{
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -71,7 +71,7 @@ public class MainBakingActivity extends AppCompatActivity implements Mainview, C
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
-        CakeAdapter adapter = new CakeAdapter(this, recipes, this);
+        CakeAdapter adapter = new CakeAdapter(this, recipes);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
@@ -92,15 +92,15 @@ public class MainBakingActivity extends AppCompatActivity implements Mainview, C
     }
 
 
-    @Override
-    public void onItemClickListener(int itemId, Cake recipe) {
-
-        Intent intent = new Intent(this, IngredientsDetailsActivity.class);
-        intent.putExtra("name", recipe.getName());
-        intent.putExtra("ingredients", String.valueOf(recipe.getIngredients()));
-        startActivity(intent);
-
-    }
+//    @Override
+//    public void onItemClickListener(int itemId, Cake recipe) {
+//
+//        Intent intent = new Intent(this, IngredientsDetailsActivity.class);
+//        intent.putExtra("name", recipe.getName());
+//        intent.putExtra("ingredients", String.valueOf(recipe.getIngredients()));
+//        startActivity(intent);
+//
+//    }
 
 
 

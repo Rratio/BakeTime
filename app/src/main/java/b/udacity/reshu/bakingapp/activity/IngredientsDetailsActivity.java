@@ -59,12 +59,13 @@ public class IngredientsDetailsActivity extends AppCompatActivity implements Ing
     }
 
     public Cake getIngredientList(){
-        Bundle bundle = getIntent().getExtras();
-        Cake cake = null;
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        ingredientsList = null;
         if(bundle != null) {
-            cake = getIntent().getParcelableExtra("ingredients");
+            ingredientsList  =  intent.getParcelableArrayListExtra("ingredients");
         }
-        return cake;
+        return new Cake();
 
     }
 

@@ -1,5 +1,8 @@
 package b.udacity.reshu.bakingapp.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -9,7 +12,7 @@ import java.util.List;
  * Created by lenovo-pc on 8/8/2018.
  */
 
-public class Cake {
+public class Cake implements Parcelable{
 
     @SerializedName("id")
     @Expose
@@ -45,6 +48,26 @@ public class Cake {
         this.serving = serving;
         this.image = image;
     }
+
+    protected Cake(Parcel in) {
+        mId = in.readInt();
+        name = in.readString();
+        ingredients = in.createTypedArrayList(Ingredients.CREATOR);
+        serving = in.readInt();
+        image = in.readString();
+    }
+
+    public static final Creator<Cake> CREATOR = new Creator<Cake>() {
+        @Override
+        public Cake createFromParcel(Parcel in) {
+            return new Cake(in);
+        }
+
+        @Override
+        public Cake[] newArray(int size) {
+            return new Cake[size];
+        }
+    };
 
     public int getmId() {
         return mId;
@@ -92,5 +115,19 @@ public class Cake {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(mId);
+        parcel.writeString(name);
+        parcel.writeTypedList(ingredients);
+        parcel.writeInt(serving);
+        parcel.writeString(image);
     }
 }

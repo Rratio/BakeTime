@@ -31,13 +31,12 @@ public class CakeAdapter extends RecyclerView.Adapter<CakeAdapter.MyViewHolder> 
 
     private Context context;
     private List<Cake> cardModelList;
-    private final ItemClickListener mItemClickListener;
 
 
-    public CakeAdapter(Context context, List<Cake> CardModels, ItemClickListener mItemClickListener) {
+    public CakeAdapter(Context context, List<Cake> CardModels) {
         this.context = context;
         this.cardModelList = CardModels;
-        this.mItemClickListener = mItemClickListener;
+
     }
 
 
@@ -49,9 +48,7 @@ public class CakeAdapter extends RecyclerView.Adapter<CakeAdapter.MyViewHolder> 
     }
 
 
-    public interface ItemClickListener {
-        void onItemClickListener(int itemId, Cake recipe);
-    }
+
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
@@ -85,7 +82,7 @@ public class CakeAdapter extends RecyclerView.Adapter<CakeAdapter.MyViewHolder> 
         return cardModelList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, release;
         public ImageView movieImg;
         public CardView cardView;
@@ -100,12 +97,7 @@ public class CakeAdapter extends RecyclerView.Adapter<CakeAdapter.MyViewHolder> 
 
         }
 
-        @Override
-        public void onClick(View view) {
-            int elementId = cardModelList.get(getAdapterPosition()).getmId();
-            Cake cake = cardModelList.get(getAdapterPosition());
-            mItemClickListener.onItemClickListener(elementId, cake);
-        }
+
     }
 }
 
