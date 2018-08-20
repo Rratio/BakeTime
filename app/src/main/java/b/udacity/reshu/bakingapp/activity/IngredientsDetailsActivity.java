@@ -58,14 +58,13 @@ public class IngredientsDetailsActivity extends AppCompatActivity implements Ing
 
     }
 
-    public Cake getIngredientList(){
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        ingredientsList = null;
+    public List<Ingredients> getIngredientList(){
+        Bundle bundle = getIntent().getExtras();
+        List<Ingredients> ingredients = null;
         if(bundle != null) {
-            ingredientsList  =  intent.getParcelableArrayListExtra("ingredients");
+            ingredients =  getIntent().getParcelableArrayListExtra("ingredients");
         }
-        return new Cake();
+        return ingredients;
 
     }
 
@@ -75,13 +74,11 @@ public class IngredientsDetailsActivity extends AppCompatActivity implements Ing
 
 
     @Override
-    public void displayIngredientslist(Cake cake) {
+    public void displayIngredientslist(List<Ingredients> ingredientsList) {
 
-        cake = new Cake();
+        if(ingredientsList != null) {
 
-        if(cake.getIngredients()!= null) {
-
-            IngredientsAdapter adapter = new IngredientsAdapter(this, cake.getIngredients());
+            IngredientsAdapter adapter = new IngredientsAdapter(this, ingredientsList);
             LinearLayoutManager llm = new LinearLayoutManager(this);
             llm.setOrientation(LinearLayoutManager.VERTICAL);
             recyclerView.setLayoutManager(llm);

@@ -1,23 +1,16 @@
 package b.udacity.reshu.bakingapp.activity;
 
-import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Rect;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.TypedValue;
-import android.view.View;
 import android.widget.Toast;
-
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import b.udacity.reshu.bakingapp.R;
 import b.udacity.reshu.bakingapp.adapter.CakeAdapter;
 import b.udacity.reshu.bakingapp.model.Cake;
@@ -28,16 +21,13 @@ import b.udacity.reshu.bakingapp.rest.ApiInterface;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainBakingActivity extends AppCompatActivity implements Mainview{
+public class MainBakingActivity extends AppCompatActivity implements Mainview, CakeAdapter.ItemClickListener {
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
-    private CakeAdapter adapter;
-    private List<Cake> modelList = new ArrayList<>();
 
     ApiInterface apiInterface;
     MainPresenter mainPresenter;
@@ -71,7 +61,7 @@ public class MainBakingActivity extends AppCompatActivity implements Mainview{
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
-        CakeAdapter adapter = new CakeAdapter(this, recipes);
+        CakeAdapter adapter = new CakeAdapter(this, recipes, this);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
@@ -91,6 +81,11 @@ public class MainBakingActivity extends AppCompatActivity implements Mainview{
 
     }
 
+    @Override
+    public void onItemClickListener(int itemId, Cake recipe) {
+
+    }
+
 
 //    @Override
 //    public void onItemClickListener(int itemId, Cake recipe) {
@@ -101,8 +96,6 @@ public class MainBakingActivity extends AppCompatActivity implements Mainview{
 //        startActivity(intent);
 //
 //    }
-
-
 
 
 }

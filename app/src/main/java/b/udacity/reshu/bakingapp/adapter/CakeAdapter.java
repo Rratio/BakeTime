@@ -1,16 +1,10 @@
 package b.udacity.reshu.bakingapp.adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
-import android.support.v7.widget.RecyclerView;
-
-/**
- * Created by Reshu-Agarwal on 8/9/2018.
- */
-
-
-import android.content.Context;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,23 +14,29 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import b.udacity.reshu.bakingapp.R;
 import b.udacity.reshu.bakingapp.activity.IngredientsDetailsActivity;
 import b.udacity.reshu.bakingapp.model.Cake;
 
+/**
+ * Created by Reshu-Agarwal on 8/9/2018.
+ */
+
 
 public class CakeAdapter extends RecyclerView.Adapter<CakeAdapter.MyViewHolder> {
 
     private Context context;
     private List<Cake> cardModelList;
+    private final ItemClickListener mItemClickListener;
 
 
-    public CakeAdapter(Context context, List<Cake> CardModels) {
+    public CakeAdapter(Context context, List<Cake> CardModels, ItemClickListener mItemClickListener) {
         this.context = context;
         this.cardModelList = CardModels;
-
+        this.mItemClickListener = mItemClickListener;
     }
 
 
@@ -48,7 +48,9 @@ public class CakeAdapter extends RecyclerView.Adapter<CakeAdapter.MyViewHolder> 
     }
 
 
-
+    public interface ItemClickListener {
+        void onItemClickListener(int itemId, Cake recipe);
+    }
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
@@ -68,7 +70,7 @@ public class CakeAdapter extends RecyclerView.Adapter<CakeAdapter.MyViewHolder> 
 
                 Intent detail = new Intent(context, IngredientsDetailsActivity.class);
                 detail.putExtra("name",cake.getName());
-                detail.putExtra("ingredients", String.valueOf(cake.getIngredients()));
+                detail.putParcelableArrayListExtra("ingredients", (ArrayList<? extends Parcelable>) cake.getIngredients());
                 context.startActivity(detail);
 
             }
@@ -82,7 +84,7 @@ public class CakeAdapter extends RecyclerView.Adapter<CakeAdapter.MyViewHolder> 
         return cardModelList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView title, release;
         public ImageView movieImg;
         public CardView cardView;
@@ -97,7 +99,11 @@ public class CakeAdapter extends RecyclerView.Adapter<CakeAdapter.MyViewHolder> 
 
         }
 
-
+        @Override
+        public void onClick(View view) {
+            int elementId = cardModelList.get(getAdapterPosition()).getmId();
+            Cake cake = cardModelList.get(getAdapterPosition());
+            mItemClickListener.onItemClickListener(elementId, cake);
+        }
     }
 }
-
