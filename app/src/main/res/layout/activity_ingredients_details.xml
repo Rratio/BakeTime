@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="b.udacity.reshu.bakingapp.activity.IngredientsDetailsActivity"
-    tools:showIn="@layout/activity_ingredients_details">
+    tools:context="b.udacity.reshu.bakingapp.activity.IngredientsDetailsActivity">
 
 
     <android.support.v7.widget.Toolbar

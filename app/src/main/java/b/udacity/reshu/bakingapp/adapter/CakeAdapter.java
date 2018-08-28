@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import java.util.List;
 
 import b.udacity.reshu.bakingapp.R;
 import b.udacity.reshu.bakingapp.activity.IngredientsDetailsActivity;
+import b.udacity.reshu.bakingapp.activity.StepActivity;
 import b.udacity.reshu.bakingapp.model.Cake;
 
 /**
@@ -63,16 +65,25 @@ public class CakeAdapter extends RecyclerView.Adapter<CakeAdapter.MyViewHolder> 
 
         Log.e("NAME","::::::"+cake.getName());
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+        holder.ingredient.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
 
 
-                Intent detail = new Intent(context, IngredientsDetailsActivity.class);
-                detail.putExtra("name",cake.getName());
-                detail.putParcelableArrayListExtra("ingredients", (ArrayList<? extends Parcelable>) cake.getIngredients());
+                Intent ingredients = new Intent(context, IngredientsDetailsActivity.class);
+                ingredients.putExtra("name",cake.getName());
+                ingredients.putParcelableArrayListExtra("ingredients", (ArrayList<? extends Parcelable>) cake.getIngredients());
+                context.startActivity(ingredients);
+
+            }
+        });
+
+        holder.step.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent detail = new Intent(context, StepActivity.class);
+                detail.putParcelableArrayListExtra("select", (ArrayList<? extends Parcelable>) cake.getSteps());
                 context.startActivity(detail);
-
             }
         });
 
@@ -88,6 +99,7 @@ public class CakeAdapter extends RecyclerView.Adapter<CakeAdapter.MyViewHolder> 
         public TextView title, release;
         public ImageView movieImg;
         public CardView cardView;
+        public Button ingredient, step;
 
 
         public MyViewHolder(View itemView) {
@@ -96,7 +108,8 @@ public class CakeAdapter extends RecyclerView.Adapter<CakeAdapter.MyViewHolder> 
             movieImg = (ImageView) itemView.findViewById(R.id.thumbnail);
             release = (TextView) itemView.findViewById(R.id.title);
             cardView = (CardView) itemView.findViewById(R.id.card_view);
-
+            ingredient = (Button)itemView.findViewById(R.id.ingredient);
+            step = (Button)itemView.findViewById(R.id.steps);
         }
 
         @Override

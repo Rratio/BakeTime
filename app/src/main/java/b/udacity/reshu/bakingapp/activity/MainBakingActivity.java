@@ -41,7 +41,6 @@ public class MainBakingActivity extends AppCompatActivity implements Mainview, C
         ButterKnife.bind(this);
         toolbar.setTitle(" Baking App");
         setSupportActionBar(toolbar);
-
         mainPresenter = new MainPresenter(this);
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
         getRecipeList();
@@ -86,16 +85,6 @@ public class MainBakingActivity extends AppCompatActivity implements Mainview, C
 
     }
 
-
-//    @Override
-//    public void onItemClickListener(int itemId, Cake recipe) {
-//
-//        Intent intent = new Intent(this, IngredientsDetailsActivity.class);
-//        intent.putExtra("name", recipe.getName());
-//        intent.putExtra("ingredients", String.valueOf(recipe.getIngredients()));
-//        startActivity(intent);
-//
-//    }
 
 
 }
