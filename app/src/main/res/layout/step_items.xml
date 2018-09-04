@@ -18,7 +18,7 @@
             android:layout_width="0dp"
             android:layout_height="70dp"
             android:layout_weight="0.3"
-            android:contentDescription="video Thumbnail"
+            android:contentDescription="@string/video_Thumbnail"
             android:scaleType="fitXY" />
 
         <TextView
@@ -33,7 +33,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:paddingStart="16dp"
-            android:text="Short Description"
+            android:text="@string/Short_Description"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp" />
 
@@ -45,7 +45,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:paddingStart="16dp"
-            android:text="Long description"
+            android:text="@string/Long_description"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp"
             android:textStyle="bold"

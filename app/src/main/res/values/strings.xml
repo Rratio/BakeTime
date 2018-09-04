@@ -1,6 +1,17 @@
 <resources>
-    <string name="app_name">BakingApp</string>
+    <string name="app_name">CakeRecipes</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="selected_recipe">Selected Recipe</string>
+    <string name="all_ingredients">All Ingredients</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="GOT_IT">GOT IT</string>
+    <string name="cooking_start">Cooking start</string>
+    <string name="Steps">Steps</string>
+    <string name="INSTRUCTIONS">INSTRUCTIONS :-</string>
+    <string name="Details">Details</string>
+    <string name="video_Thumbnail">Video Thumbnail</string>
+    <string name="Short_Description">Short Description</string>
+    <string name="Long_description">Long Description</string>
 </resources>

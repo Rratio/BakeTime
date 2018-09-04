@@ -20,9 +20,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver
+            android:name=".widgets.IngredientsWidgets"
+            android:icon="@drawable/cake"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE_OPTION" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widgets_information" />
+        </receiver>
         <activity android:name=".activity.IngredientsDetailsActivity" />
         <activity android:name=".activity.StepListContainer" />
-        <activity android:name=".activity.StepActivity"></activity>
+        <activity android:name=".activity.StepActivity" />
+
     </application>
 
 </manifest>

@@ -53,14 +53,15 @@ public class StepFragment extends Fragment {
         mStepDetail = (TextView)view.findViewById(R.id.step_detail);
         mStepDetail.setText("Step Instructions here");
 
-        step = new Steps();
+
 
         if (getArguments().containsKey(ITEM_ID)) {
             step = getArguments().getParcelable(ITEM_ID);
             description = getArguments().getString("description");
-            Log.e("DESCRIPTION",":::::::"+step.getDescription());
+
             mStepDetail.setText(step.getDescription());
         }
+
         if (step.getVideoURL().length() > 0) {
             playerView.setVisibility(View.VISIBLE);
             exoPlayer = ExoPlayerFactory.newSimpleInstance(getContext(), new DefaultTrackSelector());

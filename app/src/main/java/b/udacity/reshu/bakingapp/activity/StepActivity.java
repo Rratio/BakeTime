@@ -64,7 +64,6 @@ public class StepActivity extends AppCompatActivity implements StepView {
             steps = getIntent().getParcelableArrayListExtra("select");
         }
         return steps;
-
     }
 
     private void getSteps() {

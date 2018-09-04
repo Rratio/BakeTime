@@ -1,14 +1,22 @@
 package b.udacity.reshu.bakingapp.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,12 +47,16 @@ public class IngredientsDetailsActivity extends AppCompatActivity implements Ing
     @BindView(R.id.cook)
     Button cook_detail;
 
+    @BindView(R.id.widget)
+    ImageButton ingredients_widgets;
+
+    @BindView(R.id.cake_image)
+    ImageView mCakeImage;
+
     String recipeName;
 
-
-    List<Ingredients> ingredientsList;
     IngredientsPresenter ingredientsPresenter;
-    Ingredients ingredients;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +68,26 @@ public class IngredientsDetailsActivity extends AppCompatActivity implements Ing
 
         recipeName = getIntent().getStringExtra("name");
         recipe_name.setText(recipeName);
+        Picasso.with(this).load(R.drawable.default_image).into(mCakeImage);
         ingredientsPresenter = new IngredientsPresenter(IngredientsDetailsActivity.this, getIngredientList());
-        getList();
-        openDetails();
+        ingredientsPresenter.getRecipeIngredients();
 
+        cook_detail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(IngredientsDetailsActivity.this, StepActivity.class);
+               intent.putParcelableArrayListExtra("select", (ArrayList<? extends Parcelable>) getSelectedSteps());
+               startActivity(intent);
+
+            }
+        });
+
+        ingredients_widgets.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addToFavourites();
+            }
+        });
     }
 
     public List<Ingredients> getIngredientList() {
@@ -73,19 +101,25 @@ public class IngredientsDetailsActivity extends AppCompatActivity implements Ing
     }
 
 
-    @OnClick(R.id.cook)
-    void openDetails() {
-        Cake cake = new Cake();
-        Intent intent = new Intent(this, StepActivity.class);
-        intent.putParcelableArrayListExtra("select", (ArrayList<? extends Parcelable>) cake.getSteps());
-        startActivity(intent);
+
+    public void addToFavourites() {
+        SharedPreferences.Editor editor = getSharedPreferences("FAVOURITES", MODE_PRIVATE).edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(getIngredientList());
+        editor.putString("favourite_recipe", json);
+        editor.commit();
+        Toast.makeText(this,"You can now add widget in your Home Screen",Toast.LENGTH_LONG).show();
     }
 
+    public List<Steps> getSelectedSteps() {
+        Bundle bundle = getIntent().getExtras();
+        List<Steps> steps = null;
+        if (bundle != null) {
+            steps = getIntent().getParcelableArrayListExtra("select");
+        }
+        return steps;
 
-    private void getList() {
-        ingredientsPresenter.getRecipeIngredients();
     }
-
 
     @Override
     public void displayIngredientslist(List<Ingredients> ingredientsList) {

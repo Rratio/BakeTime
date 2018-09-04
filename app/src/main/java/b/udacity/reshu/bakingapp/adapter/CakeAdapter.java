@@ -59,7 +59,7 @@ public class CakeAdapter extends RecyclerView.Adapter<CakeAdapter.MyViewHolder> 
         final Cake cake = cardModelList.get(position);
 
 
-        Picasso.with(context).load(R.drawable.default_image).into(holder.movieImg);
+        Picasso.with(context).load(R.drawable.cake).into(holder.movieImg);
 
         holder.release.setText(cake.getName());
 
@@ -73,6 +73,7 @@ public class CakeAdapter extends RecyclerView.Adapter<CakeAdapter.MyViewHolder> 
                 Intent ingredients = new Intent(context, IngredientsDetailsActivity.class);
                 ingredients.putExtra("name",cake.getName());
                 ingredients.putParcelableArrayListExtra("ingredients", (ArrayList<? extends Parcelable>) cake.getIngredients());
+                ingredients.putParcelableArrayListExtra("select", (ArrayList<? extends Parcelable>) cake.getSteps());
                 context.startActivity(ingredients);
 
             }

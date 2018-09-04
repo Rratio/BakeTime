@@ -46,7 +46,7 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         StringBuilder stringBuilder = new StringBuilder();
 
 
-        Picasso.with(context).load(R.drawable.default_image).into(holder.mCakeImage);
+
 
          holder.details.setText(stringBuilder.append(position + 1).append(".").append(ingredients.getIngredient()).append(" ").append(ingredients.getQuantity()).append(" ").append(ingredients.getMeasure())
         );
