@@ -68,6 +68,8 @@ public class IngredientsDetailsActivity extends AppCompatActivity implements Ing
 
         recipeName = getIntent().getStringExtra("name");
         recipe_name.setText(recipeName);
+
+
         Picasso.with(this).load(R.drawable.default_image).into(mCakeImage);
         ingredientsPresenter = new IngredientsPresenter(IngredientsDetailsActivity.this, getIngredientList());
         ingredientsPresenter.getRecipeIngredients();
@@ -77,6 +79,7 @@ public class IngredientsDetailsActivity extends AppCompatActivity implements Ing
             public void onClick(View view) {
                 Intent intent = new Intent(IngredientsDetailsActivity.this, StepActivity.class);
                intent.putParcelableArrayListExtra("select", (ArrayList<? extends Parcelable>) getSelectedSteps());
+               intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                startActivity(intent);
 
             }
@@ -100,12 +103,22 @@ public class IngredientsDetailsActivity extends AppCompatActivity implements Ing
 
     }
 
+    private Cake getSelectedRecipe() {
+        Bundle data = getIntent().getExtras();
+        Cake recipe = null;
+        if (data != null) {
+            recipe = data.getParcelable("recipe");
+        }
+        return recipe;
+    }
+
+
 
 
     public void addToFavourites() {
         SharedPreferences.Editor editor = getSharedPreferences("FAVOURITES", MODE_PRIVATE).edit();
         Gson gson = new Gson();
-        String json = gson.toJson(getIngredientList());
+        String json = gson.toJson(getSelectedRecipe());
         editor.putString("favourite_recipe", json);
         editor.commit();
         Toast.makeText(this,"You can now add widget in your Home Screen",Toast.LENGTH_LONG).show();

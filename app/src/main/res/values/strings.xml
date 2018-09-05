@@ -14,4 +14,6 @@
     <string name="video_Thumbnail">Video Thumbnail</string>
     <string name="Short_Description">Short Description</string>
     <string name="Long_description">Long Description</string>
+
+    <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
 </resources>

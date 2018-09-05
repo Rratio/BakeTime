@@ -3,6 +3,10 @@ package b.udacity.reshu.bakingapp.activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.IdlingResource;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -35,7 +39,8 @@ public class MainBakingActivity extends AppCompatActivity implements Mainview, C
     ApiInterface apiInterface;
     public int state;
     MainPresenter mainPresenter;
-
+    @Nullable
+    private IdlingResource mIdlingResource;
 
 
     @Override
@@ -59,6 +64,30 @@ public class MainBakingActivity extends AppCompatActivity implements Mainview, C
 
     }
 
+    @VisibleForTesting
+    @NonNull
+    public IdlingResource getIdlingResource() {
+        if (mIdlingResource == null) {
+            mIdlingResource = new IdlingResource() {
+                @Override
+                public String getName() {
+                    return null;
+                }
+
+                @Override
+                public boolean isIdleNow() {
+                    return false;
+                }
+
+                @Override
+                public void registerIdleTransitionCallback(ResourceCallback callback) {
+
+                }
+            };
+        }
+        return mIdlingResource;
+    }
+
     private void getRecipeList() {
         mainPresenter.getRecipes();
     }
@@ -66,7 +95,7 @@ public class MainBakingActivity extends AppCompatActivity implements Mainview, C
     @Override
     public void displayRecipes(List<Cake> recipes) {
 
-        if(recipes !=null) {
+        if (recipes != null) {
             CakeAdapter adapter = new CakeAdapter(this, recipes, this);
 
             RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
@@ -82,10 +111,8 @@ public class MainBakingActivity extends AppCompatActivity implements Mainview, C
             for (int i = 0; i < adapter.getItemCount(); i++) {
                 strings.add(recipes.get(i).getName());
             }
-        }
-        else
-        {
-            Toast.makeText(MainBakingActivity.this,"No recipes available",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(MainBakingActivity.this, "No recipes available", Toast.LENGTH_LONG).show();
         }
 
     }
@@ -118,6 +145,7 @@ public class MainBakingActivity extends AppCompatActivity implements Mainview, C
             setupViews();
         }
     }
+
     @Override
     public void displayError(String e) {
 

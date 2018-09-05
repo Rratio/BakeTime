@@ -11,11 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.exoplayer2.DefaultLoadControl;
+import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.ui.PlayerView;
+import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
@@ -49,7 +52,7 @@ public class StepFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_step, container, false);
 
-        playerView = (PlayerView)view.findViewById(R.id.player_view);
+        playerView = (PlayerView) view.findViewById(R.id.player_view);
         mStepDetail = (TextView)view.findViewById(R.id.step_detail);
         mStepDetail.setText("Step Instructions here");
 
@@ -64,12 +67,10 @@ public class StepFragment extends Fragment {
 
         if (step.getVideoURL().length() > 0) {
             playerView.setVisibility(View.VISIBLE);
-            exoPlayer = ExoPlayerFactory.newSimpleInstance(getContext(), new DefaultTrackSelector());
-            playerView.setPlayer(exoPlayer);
-            DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(getContext(), Util.getUserAgent(getContext(), "exo-demo"));
-            ExtractorMediaSource mediaSource = new ExtractorMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(step.getVideoURL()));
-            exoPlayer.prepare(mediaSource);
-            exoPlayer.setPlayWhenReady(true);
+
+            initializePlayer();
+
+
 
         } else {
             playerView.setVisibility(View.GONE);
@@ -83,12 +84,31 @@ public class StepFragment extends Fragment {
         return view;
     }
 
+    private void releasePlayer() {
+        if (exoPlayer != null) {
+//            playbackPosition = exoPlayer.getCurrentPosition();
+//            currentWindow = exoPlayer.getCurrentWindowIndex();
+//            playWhenReady = exoPlayer.getPlayWhenReady();
+            exoPlayer.release();
+            exoPlayer = null;
+        }
+    }
 
-    @Override
-    public void onStart() {
-        super.onStart();
+    private void initializePlayer() {
+        exoPlayer = ExoPlayerFactory.newSimpleInstance(
+                new DefaultRenderersFactory(getActivity()),
+                new DefaultTrackSelector(), new DefaultLoadControl());
+
+        playerView.setPlayer(exoPlayer);
+
+        DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(getContext(), Util.getUserAgent(getContext(), "exo-demo"));
+        ExtractorMediaSource mediaSource = new ExtractorMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(step.getVideoURL()));
+        exoPlayer.prepare(mediaSource);
+        exoPlayer.setPlayWhenReady(true);
 
     }
+
+
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
@@ -102,10 +122,9 @@ public class StepFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        Log.i(TAG, "onStop:called ");
-        playerView.setPlayer(null);
-        if (exoPlayer != null)
-            exoPlayer.release();
+        if (Util.SDK_INT > 23) {
+           releasePlayer();
+        }
     }
 
     @Override
@@ -114,6 +133,32 @@ public class StepFragment extends Fragment {
         Log.i(TAG, "onDestroy:called ");
         playerView.setPlayer(null);
 
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (Util.SDK_INT <= 23) {
+            // release player
+          releasePlayer();
+        }
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (Util.SDK_INT > 23) {
+            initializePlayer();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if ((Util.SDK_INT <= 23 || exoPlayer == null)) {
+           initializePlayer();
+        }
     }
 
 }
