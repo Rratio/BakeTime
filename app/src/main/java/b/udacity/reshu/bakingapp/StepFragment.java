@@ -41,6 +41,7 @@ public class StepFragment extends Fragment {
     String description;
 
 
+
     public StepFragment() {
         // Required empty public constructor
     }
@@ -86,7 +87,7 @@ public class StepFragment extends Fragment {
 
     private void releasePlayer() {
         if (exoPlayer != null) {
-//            playbackPosition = exoPlayer.getCurrentPosition();
+//             playbackPosition = exoPlayer.getCurrentPosition();
 //            currentWindow = exoPlayer.getCurrentWindowIndex();
 //            playWhenReady = exoPlayer.getPlayWhenReady();
             exoPlayer.release();
@@ -104,7 +105,7 @@ public class StepFragment extends Fragment {
         DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(getContext(), Util.getUserAgent(getContext(), "exo-demo"));
         ExtractorMediaSource mediaSource = new ExtractorMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(step.getVideoURL()));
         exoPlayer.prepare(mediaSource);
-        exoPlayer.setPlayWhenReady(true);
+        exoPlayer.setPlayWhenReady(exoPlayer.getPlayWhenReady());
 
     }
 

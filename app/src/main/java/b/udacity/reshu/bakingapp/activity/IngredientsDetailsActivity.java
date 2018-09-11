@@ -70,7 +70,7 @@ public class IngredientsDetailsActivity extends AppCompatActivity implements Ing
         recipe_name.setText(recipeName);
 
 
-        Picasso.with(this).load(R.drawable.default_image).into(mCakeImage);
+        Picasso.with(this).load(R.drawable.cake).into(mCakeImage);
         ingredientsPresenter = new IngredientsPresenter(IngredientsDetailsActivity.this, getIngredientList());
         ingredientsPresenter.getRecipeIngredients();
 
@@ -78,9 +78,9 @@ public class IngredientsDetailsActivity extends AppCompatActivity implements Ing
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(IngredientsDetailsActivity.this, StepActivity.class);
-               intent.putParcelableArrayListExtra("select", (ArrayList<? extends Parcelable>) getSelectedSteps());
-               intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-               startActivity(intent);
+                intent.putParcelableArrayListExtra("select", (ArrayList<? extends Parcelable>) getSelectedSteps());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
 
             }
         });

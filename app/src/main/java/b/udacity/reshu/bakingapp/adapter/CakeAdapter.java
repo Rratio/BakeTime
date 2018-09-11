@@ -78,6 +78,8 @@ public class CakeAdapter extends RecyclerView.Adapter<CakeAdapter.MyViewHolder> 
                 ingredients.putExtra("name",cake.getName());
                 ingredients.putParcelableArrayListExtra("ingredients", (ArrayList<? extends Parcelable>) cake.getIngredients());
                 ingredients.putParcelableArrayListExtra("select", (ArrayList<? extends Parcelable>) cake.getSteps());
+                ingredients.putExtra("recipe", cardModelList.get(position));
+                ingredients.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(ingredients);
 
             }
@@ -88,7 +90,7 @@ public class CakeAdapter extends RecyclerView.Adapter<CakeAdapter.MyViewHolder> 
             public void onClick(View view) {
                 Intent detail = new Intent(context, StepActivity.class);
                 detail.putParcelableArrayListExtra("select", (ArrayList<? extends Parcelable>) cake.getSteps());
-                detail.putExtra("recipe", cardModelList.get(position));
+                detail.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(detail);
             }
         });

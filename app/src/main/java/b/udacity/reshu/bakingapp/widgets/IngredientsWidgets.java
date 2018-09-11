@@ -87,4 +87,3 @@ public class IngredientsWidgets extends AppWidgetProvider {
         return gson.fromJson(json, Cake.class);
     }
 }
-

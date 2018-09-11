@@ -71,6 +71,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.MyViewHolder> 
             } else {
                 Intent intent = new Intent(context, StepListContainer.class);
                 intent.putExtra(StepFragment.ITEM_ID, step);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
         }
