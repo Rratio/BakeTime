@@ -8,7 +8,7 @@ import b.udacity.reshu.bakingapp.R;
 import b.udacity.reshu.bakingapp.StepFragment;
 
 /**
- * Created by lenovo-pc on 8/28/2018.
+ * Created by Reshu-Agarwal on 8/28/2018.
  */
 
 public class StepListContainer extends AppCompatActivity {

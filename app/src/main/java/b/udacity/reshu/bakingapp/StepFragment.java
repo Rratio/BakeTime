@@ -158,7 +158,7 @@ public class StepFragment extends Fragment {
     public void onResume() {
         super.onResume();
         if ((Util.SDK_INT <= 23 || exoPlayer == null)) {
-           initializePlayer();
+//           initializePlayer();
         }
     }
 
