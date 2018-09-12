@@ -103,25 +103,24 @@ public class IngredientsDetailsActivity extends AppCompatActivity implements Ing
 
     }
 
-    private Cake getSelectedRecipe() {
-        Bundle data = getIntent().getExtras();
-        Cake recipe = null;
-        if (data != null) {
-            recipe = data.getParcelable("recipe");
-        }
-        return recipe;
-    }
-
-
-
-
     public void addToFavourites() {
         SharedPreferences.Editor editor = getSharedPreferences("FAVOURITES", MODE_PRIVATE).edit();
         Gson gson = new Gson();
         String json = gson.toJson(getSelectedRecipe());
         editor.putString("favourite_recipe", json);
         editor.commit();
-        Toast.makeText(this,"You can now add widget in your Home Screen",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"You can now add widget in your Home Screen", Toast.LENGTH_LONG).show();
+    }
+
+
+
+    private Cake getSelectedRecipe() {
+        Bundle data = getIntent().getExtras();
+        Cake cake = null;
+        if (data != null) {
+            cake = data.getParcelable("recipe");
+        }
+        return cake;
     }
 
     public List<Steps> getSelectedSteps() {
