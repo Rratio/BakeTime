@@ -3,29 +3,22 @@ package b.udacity.reshu.bakingapp.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import b.udacity.reshu.bakingapp.R;
 import b.udacity.reshu.bakingapp.StepFragment;
-import b.udacity.reshu.bakingapp.activity.IngredientsDetailsActivity;
-import b.udacity.reshu.bakingapp.activity.StepActivity;
 import b.udacity.reshu.bakingapp.activity.StepListContainer;
-import b.udacity.reshu.bakingapp.model.Cake;
 import b.udacity.reshu.bakingapp.model.Steps;
 
 /**
@@ -37,7 +30,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.MyViewHolder> 
 
     private Context context;
     private List<Steps> stepsList;
-    private  boolean twoPane;
+    private boolean twoPane;
 
 
     public StepAdapter(Context context, List<Steps> stepsList, boolean twoPane) {
@@ -53,7 +46,6 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.MyViewHolder> 
 
         return new MyViewHolder(view);
     }
-
 
 
     private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
@@ -86,14 +78,13 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.MyViewHolder> 
         holder.mLongDescription.setText(steps.getDescription());
         holder.itemView.setTag(stepsList.get(position));
         if (!stepsList.get(position).getThumbnailURL().trim().equals("")) {
-            Picasso.with(context).load(stepsList.get(position)
-                    .getThumbnailURL()).placeholder(R.drawable.cake)
-                    .error(R.drawable.cake)
+            Glide.with(context).load(stepsList.get(position).getThumbnailURL())
                     .into(holder.cake_image);
-        }
-        else{
-            Picasso.with(context).load(R.drawable.cake)
-                    .into(holder.cake_image);
+
+        } else {
+
+            Glide.with(context)
+                    .load(R.drawable.cake).into(holder.cake_image);
         }
 
     }

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true"
     android:orientation="vertical"
     android:nestedScrollingEnabled="true"
@@ -67,6 +68,17 @@
             android:clickable="true"
             android:focusable="true"
             android:scaleType="fitXY" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_fav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            app:layout_anchorGravity="bottom|end"
+            android:onClick="onClickFAB"
+            android:contentDescription="@string/click_here_to_mark_recipe_as_favorite"
+            app:background="@drawable/favorite_border_primary_24dp"
+            tools:ignore="VectorDrawableCompat" />
 
         <Button
             android:id="@+id/cook"

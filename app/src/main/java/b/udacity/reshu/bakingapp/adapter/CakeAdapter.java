@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -60,9 +61,12 @@ public class CakeAdapter extends RecyclerView.Adapter<CakeAdapter.MyViewHolder> 
 
 
         if(!cardModelList.get(position).getImage().trim().equals(""))
-            Picasso.with(context).load(cardModelList.get(position).getImage()).placeholder(R.drawable.cake).into(holder.movieImg);
+        Glide.with(context)
+                .load(cardModelList.get(position).getImage())
+                .into(holder.movieImg);
         else{
-            Picasso.with(context).load(R.drawable.cake).into(holder.movieImg);
+            Glide.with(context)
+                    .load(R.drawable.cake).into(holder.movieImg);
         }
 
         holder.release.setText(cake.getName());

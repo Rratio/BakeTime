@@ -15,6 +15,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +43,7 @@ public class MainBakingActivity extends AppCompatActivity implements Mainview, C
     MainPresenter mainPresenter;
     @Nullable
     private IdlingResource mIdlingResource;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
 
     @Override
@@ -50,10 +53,15 @@ public class MainBakingActivity extends AppCompatActivity implements Mainview, C
         ButterKnife.bind(this);
         toolbar.setTitle(" Baking App");
         setSupportActionBar(toolbar);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         mainPresenter = new MainPresenter(this);
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
-
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "id");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "name");
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
         if (isTablet(this) || getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             state = 1;
         } else {

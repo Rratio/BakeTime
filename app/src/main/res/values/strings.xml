@@ -11,9 +11,17 @@
     <string name="Steps">Steps</string>
     <string name="INSTRUCTIONS">INSTRUCTIONS :-</string>
     <string name="Details">Details</string>
+    <string name="cheese_cake">Cheese Cake</string>
+    <string name="_1_0">1.0</string>
     <string name="video_Thumbnail">Video Thumbnail</string>
     <string name="Short_Description">Short Description</string>
     <string name="Long_description">Long Description</string>
-
+    <string name="Sign_in">Sign In</string>
+    <string name="Recipe">Recipe</string>
+    <string name="no_Recipe">No Recipe</string>
+    <string name="recipe_image">Recipe Image</string>
+    <string name="toast_msg_added_as_favorite">Added as Favorite</string>
+    <string name="nutella_or_other_chocolate_hazelnut_spread">Nutella or other chocolate-hazelnut spread</string>
+    <string name="click_here_to_mark_recipe_as_favorite">Click here to mark recipe as favorite</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
 </resources>

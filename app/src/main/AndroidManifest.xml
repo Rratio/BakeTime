@@ -35,10 +35,11 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widgets_information" />
         </receiver>
+
         <activity android:name=".activity.IngredientsDetailsActivity" />
         <activity android:name=".activity.StepListContainer" />
         <activity android:name=".activity.StepActivity" />
-
+        <activity android:name=".activity.LoginActivity"></activity>
     </application>
 
 </manifest>

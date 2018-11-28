@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "691645641287",
+    "firebase_url": "https://capstonestage2-f8641.firebaseio.com",
+    "project_id": "capstonestage2-f8641",
+    "storage_bucket": "capstonestage2-f8641.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:691645641287:android:7351c3b369c6a057",
+        "android_client_info": {
+          "package_name": "b.udacity.reshu.bakingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "691645641287-0u6a43i96di6cnagut5qeue3eouma9ud.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "b.udacity.reshu.bakingapp",
+            "certificate_hash": "93f3549b9c5f977b8bc6216e535b6596e3dd4392"
+          }
+        },
+        {
+          "client_id": "691645641287-vm21cvelnfe93dkmr98jb3dhmlg3kc34.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPnemsZddg1S3oN5JY_es6_nlP2CCQ7xs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "691645641287-vm21cvelnfe93dkmr98jb3dhmlg3kc34.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
